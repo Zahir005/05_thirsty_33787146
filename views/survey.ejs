@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey • <%= shopName %></title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Customer Survey</h1>
+      <p class="subtitle">Please fill in your details and tell us a bit about your drinks preferences.</p>
+
+      <% if (errors && errors.length) { %>
+        <div class="card" style="border-color:#ef4444">
+          <strong>Fix the following:</strong>
+          <ul>
+            <% errors.forEach(e => { %><li><%= e %></li><% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form action="/survey" method="POST" novalidate>
+        <!-- Personal details -->
+        <label for="firstName">First name</label>
+        <input id="firstName" name="firstName" type="text" required
+               value="<%= (form && form.firstName) || '' %>">
+
+        <label for="surname">Surname</label>
+        <input id="surname" name="surname" type="text" required
+               value="<%= (form && form.surname) || '' %>">
+
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" required
+               value="<%= (form && form.email) || '' %>">
+
+        <!-- Questions -->
+        <label for="age">How old are you?</label>
+        <input id="age" name="age" type="number" min="1" max="120" step="1" required
+               inputmode="numeric" value="<%= (form && form.age) || '' %>">
+
+        <label>Which of the following drinks categories do you consume? (choose all that apply)</label>
+        <div class="card">
+          <% 
+            const selected = (form && form.drinks) ? form.drinks : [];
+            for (let i=0; i<productCategories.length; i++) { 
+              const cat = productCategories[i];
+              const checked = selected.includes(cat) ? 'checked' : '';
+          %>
+            <div style="margin:6px 0;">
+              <input type="checkbox" id="drink-<%= i %>" name="drinks" value="<%= cat %>" <%= checked %> />
+              <label for="drink-<%= i %>"><%= cat %></label>
+            </div>
+          <% } %>
+        </div>
+
+        <label for="student">Are you a student?</label>
+        <div class="card">
+          <input type="checkbox" id="student" name="student" <%= (form && form.isStudent) ? 'checked' : '' %> />
+          <label for="student">Tick for Yes (leave unticked for No)</label>
+        </div>
+
+        <input type="submit" value="Submit survey">
+      </form>
+    </div>
+  </body>
+</html>

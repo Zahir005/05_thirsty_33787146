@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>About • <%= shopName %></title>
+    <!-- If you added the Inter font earlier, keep those links here too -->
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>About <%= shopName %></h1>
+
+      <h2>Our Shops</h2>
+      <ul class="shops">
+        <% shops.forEach(function(s){ %>
+          <li class="shop-card">
+            <div class="shop-name"><%= s.name %></div>
+            <div class="shop-line"><strong>Manager:</strong> <%= s.manager %></div>
+            <div class="shop-line"><strong>Address:</strong> <%= s.address %></div>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </body>
+</html>

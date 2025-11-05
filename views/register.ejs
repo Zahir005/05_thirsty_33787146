@@ -1,0 +1,27 @@
+<!doctype html> 
+<html>  
+  <head>  
+    <title><%=shopName%></title> 
+    <link rel="stylesheet" href="/styles.css">
+
+  </head>  
+  <body>  
+    <h1> This is the register page </h1> 
+    <form action="/registered" method="POST">
+        First Name: <input type="text" name="first" required /><br/>
+        Last Name:  <input type="text" name="last"  required /><br/>
+    
+        <!-- Email validation -->
+        Email:
+        <input
+          type="email"
+          name="email"
+          required
+          pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[A-Za-z]{2,}"
+          title="Enter a valid email like name@example.com"
+        /><br/>
+    
+        <input type="submit" value="OK" />
+      </form>
+</body>  
+</html> 
